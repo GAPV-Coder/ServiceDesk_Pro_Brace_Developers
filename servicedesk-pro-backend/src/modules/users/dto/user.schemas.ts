@@ -12,12 +12,13 @@ export const CreateUserSchema = z.object({
 });
 
 export const UpdateUserSchema = z.object({
-    firstName: z.string().min(2).optional(),
-    lastName: z.string().min(2).optional(),
+    first_name: z.string().min(2).optional(),
+    last_name: z.string().min(2).optional(),
     department: z.string().optional(),
     jobTitle: z.string().optional(),
     status: z.enum([...Object.values(UserStatus)]).optional(),
     role: z.enum([...Object.values(UserRole)]).optional(),
+    email: z.string().email('Email must be valid').optional(),
 });
 
 export const UserQuerySchema = z.object({
