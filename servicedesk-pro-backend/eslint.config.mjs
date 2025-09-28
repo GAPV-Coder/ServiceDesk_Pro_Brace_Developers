@@ -49,6 +49,10 @@ export default tseslint.config(
       '@typescript-eslint/no-misused-promises': 'off',
       'require-await': 'off',
       '@typescript-eslint/require-await': 'off',
+      'eslint no-case-declarations': 'off',
+      'eslint no-empty-function': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
+      '@typescript-eslint/no-unsafe-enum-comparison': 'off',
     },
   },
 );

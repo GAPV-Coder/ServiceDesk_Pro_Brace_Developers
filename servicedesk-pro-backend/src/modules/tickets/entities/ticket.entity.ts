@@ -64,10 +64,10 @@ export class Ticket extends BaseEntity {
     resolutionDue: Date;
 
     @Column({ type: 'timestamp', nullable: true })
-    firstResponseAt: Date;
+    firstResponseAt: Date | null;
 
     @Column({ type: 'timestamp', nullable: true })
-    resolvedAt: Date;
+    resolvedAt: Date | null;
 
     @Column({
         type: 'enum',

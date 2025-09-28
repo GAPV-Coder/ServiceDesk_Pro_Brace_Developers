@@ -3,7 +3,7 @@ import { Ticket, SLAStatus } from '../../modules/tickets/entities/ticket.entity'
 
 @Injectable()
 export class SLAService {
-    calculateSLAStatus(dueDate: Date, completedAt?: Date): SLAStatus {
+    calculateSLAStatus(dueDate: Date, completedAt?: Date | null): SLAStatus {
         const now = new Date();
 
         // Si ya fue completado, verificar si fue a tiempo
