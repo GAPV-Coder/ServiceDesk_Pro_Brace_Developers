@@ -196,8 +196,8 @@ export class UsersService {
         const query = this.userRepository.createQueryBuilder('user');
 
         QueryUtil.applyTextSearch(query, searchTerm, [
-            'user.firstName',
-            'user.lastName',
+            'user.first_name',
+            'user.last_name',
             'user.email'
         ]);
 
@@ -206,7 +206,7 @@ export class UsersService {
         }
 
         query.andWhere('user.status = :status', { status: UserStatus.ACTIVE });
-        query.orderBy('user.firstName', 'ASC');
+        query.orderBy('user.first_name', 'ASC');
         query.take(20); // Límite para búsquedas
 
         return query.getMany();
