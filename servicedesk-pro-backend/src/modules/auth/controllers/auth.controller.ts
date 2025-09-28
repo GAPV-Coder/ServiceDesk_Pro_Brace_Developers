@@ -1,4 +1,4 @@
-import { Controller, Post, Body, UseGuards, Get, Put } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, Get, Put, UseGuards } from '@nestjs/common';
 import {
     ApiTags,
     ApiOperation,
@@ -21,6 +21,7 @@ import {
     RegisterSchema,
     ChangePasswordSchema,
 } from '../dto/uth.schemas';
+import { JwtAuthGuard } from 'src/common/guards/jwt-auth.guard';
 
 // Las clases Swagger DTO se definen localmente para garantizar la compatibilidad con @nestjs/swagger para la documentación de la API,
 // al tiempo que se mantiene la validación de tipos basada en Zod existente para garantizar la seguridad y la coherencia en tiempo de ejecución.
@@ -69,10 +70,14 @@ export class AuthController {
     }
 
     @Get('me')
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: 'Retrieve current user profile' })
     @ApiResponse({ status: 200, description: 'User profile retrieved successfully', type: User })
     @ApiResponse({ status: 401, description: 'Unauthorized' })
     async getProfile(@CurrentUser() user: User) {
+        if (!user) {
+            throw new BadRequestException('User not authenticated');
+        }
         return {
             id: user.id,
             email: user.email,
@@ -89,6 +94,7 @@ export class AuthController {
     }
 
     @Put('change-password')
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: 'Change user password' })
     @ApiBody({ type: ChangePasswordDtoSwagger })
     @ApiResponse({ status: 200, description: 'Password changed successfully' })
@@ -103,6 +109,7 @@ export class AuthController {
     }
 
     @Post('refresh')
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: 'Refresh user token' })
     @ApiResponse({ status: 200, description: 'Token refreshed successfully' })
     @ApiResponse({ status: 401, description: 'Unauthorized' })
@@ -111,6 +118,7 @@ export class AuthController {
     }
 
     @Post('logout')
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({ summary: 'User logout' })
     @ApiResponse({ status: 200, description: 'Logged out successfully' })
     @ApiResponse({ status: 401, description: 'Unauthorized' })

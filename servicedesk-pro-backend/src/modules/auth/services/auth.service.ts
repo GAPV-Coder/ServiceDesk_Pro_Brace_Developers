@@ -211,4 +211,17 @@ export class AuthService {
             expiresIn: 24 * 60 * 60,
         };
     }
+
+    async getUserFromPayload(payload: JwtPayload): Promise<User> {
+        const user = await this.userRepository.findOne({
+            where: { id: payload.sub },
+            select: ['id', 'email', 'first_name', 'last_name', 'role', 'department', 'jobTitle', 'status'],
+        });
+
+        if (!user || !user.isActive()) {
+            throw new UnauthorizedException('Invalid token or user inactive');
+        }
+
+        return user;
+    }
 }

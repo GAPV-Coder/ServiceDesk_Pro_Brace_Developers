@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
-import { JwtStrategyService } from './services/jwt-strategy.service';
+import { JwtStrategy } from './services/jwt-strategy.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { User } from '../users/entities/user.entity';
 import { HashService } from '../../shared/services/hash.service';
@@ -18,11 +18,12 @@ import { getJwtConfig } from '../../config/jwt.config';
             useFactory: getJwtConfig,
             inject: [ConfigService],
         }),
+        ConfigModule,
     ],
     controllers: [AuthController],
     providers: [
         AuthService,
-        JwtStrategyService,
+        JwtStrategy,
         JwtAuthGuard,
         HashService,
     ],
