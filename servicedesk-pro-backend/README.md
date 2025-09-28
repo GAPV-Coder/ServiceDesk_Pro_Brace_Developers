@@ -2,97 +2,163 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Descripción
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# ServiceDesk Pro Backend
 
-## Description
+Una plataforma interna para gestión de tickets de soporte técnico construida con NestJS, TypeScript y PostgreSQL.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🚀 Características
 
-## Project setup
+- **Autenticación JWT** sin Passport
+- **Autorización basada en roles** (Requester, Agent, Manager)
+- **Gestión completa de tickets** con SLA
+- **Categorías personalizables** con campos dinámicos
+- **Auditoría completa** de acciones
+- **Dashboard con métricas** en tiempo real
+- **API REST** bien documentada
+- **Validaciones con Zod**
+- **Arquitectura limpia** siguiendo principios SOLID
 
+## 🛠️ Stack Tecnológico
+
+- **Backend**: NestJS + TypeScript
+- **Base de datos**: PostgreSQL + TypeORM
+- **Autenticación**: JWT (sin Passport)
+- **Validación**: Zod
+- **Arquitectura**: Clean Architecture + SRP
+
+## 📦 Instalación
+
+1. **Clonar el repositorio**
 ```bash
-$ npm install
+git clone <repository-url>
+cd servicedesk-pro-backend
 ```
 
-## Compile and run the project
-
+2. **Instalar dependencias**
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm install
 ```
 
-## Run tests
-
+3. **Configurar variables de entorno**
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+cp .env.example .env
+# Editar .env con tus configuraciones
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+4. **Configurar PostgreSQL**
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Crear base de datos
+createdb servicedesk_pro
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+5. **Ejecutar migraciones** (si existen)
+```bash
+npm run migration:run
+```
 
-## Resources
+6. **Poblar base de datos**
+```bash
+npm run seed
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+7. **Iniciar aplicación**
+```bash
+# Desarrollo
+npm run start:dev
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# Producción
+npm run build
+npm run start:prod
+```
 
-## Support
+## 🗃️ Estructura del Proyecto
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+src/
+├── common/           # Guards, filters, interceptors globales
+├── config/           # Configuraciones (DB, JWT, App)
+├── modules/          # Módulos de la aplicación
+│   ├── auth/         # Autenticación y autorización
+│   ├── users/        # Gestión de usuarios
+│   ├── categories/   # Categorías de tickets
+│   ├── tickets/      # Gestión de tickets
+│   ├── audit/        # Auditoría del sistema
+│   └── dashboard/    # Métricas y dashboard
+├── shared/           # Servicios y utilidades compartidas
+└── database/         # Seeds y migraciones
+```
 
-## Stay in touch
+## 🔐 Autenticación
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+La API utiliza JWT para autenticación. Incluye el token en el header:
 
-## License
+```
+Authorization: Bearer <token>
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 👥 Roles del Sistema
+
+- **Requester**: Crear y ver sus propios tickets
+- **Agent**: Gestionar tickets asignados
+- **Manager**: Acceso completo + dashboard y configuración
+
+## 🎯 Endpoints Principales
+
+### Autenticación
+- `POST /api/v1/auth/login` - Iniciar sesión
+- `POST /api/v1/auth/register` - Registrarse
+- `GET /api/v1/auth/me` - Perfil actual
+
+### Usuarios
+- `GET /api/v1/users` - Listar usuarios (Manager)
+- `POST /api/v1/users` - Crear usuario (Manager)
+- `PUT /api/v1/users/:id` - Actualizar usuario
+
+### Categorías
+- `GET /api/v1/categories` - Listar categorías
+- `POST /api/v1/categories` - Crear categoría (Manager)
+- `PUT /api/v1/categories/:id` - Actualizar categoría
+
+### Tickets
+- `GET /api/v1/tickets` - Listar tickets
+- `POST /api/v1/tickets` - Crear ticket
+- `PUT /api/v1/tickets/:id` - Actualizar ticket
+- `POST /api/v1/tickets/:id/comments` - Agregar comentario
+
+## 🏗️ Arquitectura
+
+El proyecto sigue **Clean Architecture** y el principio de **Responsabilidad Única (SRP)**:
+
+- **Controladores**: Manejan HTTP requests/responses
+- **Servicios**: Lógica de negocio
+- **Repositorios**: Acceso a datos (TypeORM)
+- **Entidades**: Modelos de dominio
+- **DTOs**: Validación y transferencia de datos
+- **Guards**: Autenticación y autorización
+- **Interceptores**: Cross-cutting concerns (auditoría)
+
+## 🧪 Testing
+
+```bash
+# Tests unitarios
+npm run test
+
+# Tests con coverage
+npm run test:cov
+
+# Tests e2e
+npm run test:e2e
+```
+
+## 🚀 Despliegue
+
+1. **Variables de entorno de producción**
+2. **Build del proyecto**: `npm run build`
+3. **Ejecutar migraciones**: `npm run migration:run`
+4. **Iniciar**: `npm run start:prod`
+
+## 📝 Licencia
+
+MIT License
