@@ -3,20 +3,19 @@ import {
     NotFoundException,
     ForbiddenException,
     BadRequestException,
-    ConflictException
+    Inject
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Ticket, TicketStatus, SLAStatus } from '../entities/ticket.entity';
 import { TicketComment, CommentType } from '../entities/ticket-comment.entity';
 import { User, UserRole } from '../../users/entities/user.entity';
-import { Category } from '../../categories/entities/category.entity';
 import { CategoriesService } from '../../categories/services/categories.service';
 import { TicketNumberService } from '../../../shared/services/ticket-number.service';
 import { SLAService } from '../../../shared/services/sla.service';
 import { PaginationUtil, PaginationResult } from '../../../shared/utils/pagination.util';
 import { QueryUtil } from '../../../shared/utils/query.util';
+import { EventEmitter2 } from 'eventemitter2';
 import {
     CreateTicketDto,
     UpdateTicketDto,
@@ -37,7 +36,7 @@ export class TicketsService {
         private categoriesService: CategoriesService,
         private ticketNumberService: TicketNumberService,
         private slaService: SLAService,
-        private eventEmitter: EventEmitter2,
+        @Inject('EventEmitter2') private eventEmitter: EventEmitter2,
     ) { }
 
     async findAll(queryDto: TicketQueryDto, currentUser: User): Promise<PaginationResult<Ticket>> {

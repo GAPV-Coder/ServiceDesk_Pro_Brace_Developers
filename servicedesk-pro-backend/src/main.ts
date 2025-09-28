@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe } from '@nestjs/common';
 import { AppModule } from './app.module';
@@ -10,10 +11,20 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const appConfig = getAppConfig();
 
-  // Global configuration
+  const config = new DocumentBuilder()
+    .setTitle('ServiceDesk Pro API')
+    .setDescription('ServiceDesk Pro API documentation with Swagger')
+    .setVersion('1.0')
+    .addBearerAuth() // Para JWT
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document);
+
+  // Global configuración del prefijo de la ruta
   app.setGlobalPrefix('api/v1');
 
-  // CORS configuration
+  // CORS configuración del prefijo de la ruta
   app.enableCors({
     origin: appConfig.corsOrigin,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],

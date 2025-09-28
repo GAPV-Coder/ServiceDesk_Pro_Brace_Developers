@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
-import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Ticket, SLAStatus, TicketStatus } from '../entities/ticket.entity';
 import { SLAService } from '../../../shared/services/sla.service';
+import { EventEmitter2 } from 'eventemitter2';
 
 @Injectable()
 export class SLAMonitorService {
@@ -12,7 +12,7 @@ export class SLAMonitorService {
         @InjectRepository(Ticket)
         private ticketRepository: Repository<Ticket>,
         private slaService: SLAService,
-        private eventEmitter: EventEmitter2,
+        @Inject('EventEmitter2') private eventEmitter: EventEmitter2,
     ) { }
 
     @Cron(CronExpression.EVERY_5_MINUTES)

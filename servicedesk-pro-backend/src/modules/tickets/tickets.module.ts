@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EventEmitter2 } from 'eventemitter2';
 import { Ticket } from './entities/ticket.entity';
 import { TicketComment } from './entities/ticket-comment.entity';
 import { User } from '../users/entities/user.entity';
@@ -13,6 +14,8 @@ import { CategoriesService } from '../categories/services/categories.service';
 import { TicketNumberService } from '../../shared/services/ticket-number.service';
 import { SLAService } from '../../shared/services/sla.service';
 import { AuditService } from '../../shared/services/audit.service';
+import { CategoriesModule } from '../categories/categories.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
     imports: [
@@ -23,6 +26,8 @@ import { AuditService } from '../../shared/services/audit.service';
             Category,
             AuditLog,
         ]),
+        CategoriesModule,
+        AuthModule,
     ],
     controllers: [TicketsController],
     providers: [
@@ -33,6 +38,10 @@ import { AuditService } from '../../shared/services/audit.service';
         TicketNumberService,
         SLAService,
         AuditService,
+        {
+            provide: 'EventEmitter2', // Define el token
+            useValue: new EventEmitter2(), // Instancia el EventEmitter2
+        },
     ],
     exports: [TicketsService],
 })

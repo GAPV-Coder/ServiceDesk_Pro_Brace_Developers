@@ -6,6 +6,7 @@ import { Category } from '../categories/entities/category.entity';
 import { TicketComment } from '../tickets/entities/ticket-comment.entity';
 import { DashboardController } from './controllers/dashboard.controller';
 import { DashboardService } from './services/dashboard.service';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { DashboardService } from './services/dashboard.service';
             Category,
             TicketComment,
         ]),
+        AuthModule,
     ],
     controllers: [DashboardController],
     providers: [DashboardService],
