@@ -1,36 +1,138 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ServiceDesk Pro Frontend
 
-## Getting Started
+Interfaz web moderna para gestión de tickets de soporte técnico, construida con **Next.js 14**, **React 18**, **Redux Toolkit**, y **TailwindCSS 4**.
+Inspirada en plataformas como **Linear** y **Zendesk**, ofrece una experiencia rápida, minimalista y centrada en la productividad.
 
-First, run the development server:
+## 🚀 Características
+
+* **Autenticación JWT** integrada con el backend
+* **Gestión de tickets**: creación, visualización, actualización y comentarios
+* **Filtros y Tabs dinámicos** (open/closed/all)
+* **Dashboard** con métricas básicas de usuario
+* **Interfaz inspirada en Linear/Zendesk**: limpia, rápida y accesible
+* **Validaciones con Zod** en formularios
+* **Arquitectura modular** con hooks y slices de Redux
+* **Diseño responsive** y accesible
+
+## 🛠️ Stack Tecnológico
+
+* **Framework**: Next.js 14 + React 18
+* **Estado global**: Redux Toolkit
+* **Estilos**: TailwindCSS 4 + shadcn/ui
+* **Validación**: Zod + React Hook Form
+* **Icons**: Lucide React
+* **Notificaciones**: Sonner
+* **Charts**: Chart.js (para dashboard)
+
+## 📦 Instalación
+
+1. **Clonar el repositorio**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd servicedesk-pro-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Instalar dependencias**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Configurar variables de entorno**
 
-## Learn More
+```bash
+cp .env.example .env
+# Editar con la URL de tu backend y configuraciones
+```
 
-To learn more about Next.js, take a look at the following resources:
+Ejemplo:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_API_URL=http://localhost:4000/api/v1
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Iniciar aplicación**
 
-## Deploy on Vercel
+```bash
+# Desarrollo
+npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Producción
+npm run build
+npm run start
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🗃️ Estructura del Proyecto
+
+```
+src/
+├── app/                 # Rutas y páginas Next.js
+│   ├── login/           # Página de login
+│   ├── register/        # Registro de usuarios
+│   ├── my-tickets/      # Tickets del usuario
+│   └── dashboard/       # Dashboard de métricas
+├── components/          # Componentes UI reutilizables
+│   ├── layout/          # PageContainer, PageHeader
+│   ├── tickets/         # TicketList, TicketCard
+│   └── ui/              # Botones, Tabs, Inputs, etc.
+├── lib/
+│   ├── api/             # Servicios y tipos de la API
+│   ├── hooks/           # Custom hooks (useAuth, useTickets)
+│   ├── store/           # Redux Toolkit slices
+│   └── validations/     # Schemas con Zod
+```
+
+## 👥 Roles del Sistema
+
+* **Requester**: Crea y visualiza sus tickets
+* **Agent**: Gestiona tickets asignados
+* **Manager**: Acceso completo + dashboard
+
+## 🎯 Páginas Principales
+
+* `/login` - Inicio de sesión
+* `/register` - Registro de nuevos usuarios
+* `/my-tickets` - Listado de tickets propios
+* `/tickets/new` - Crear ticket
+* `/dashboard` - Métricas del sistema (Manager)
+
+## 🖼️ Screenshots
+
+### Login
+
+![Login](docs/screenshots/login.png)
+
+### Tickets
+
+![My Tickets](docs/screenshots/my-tickets.png)
+
+### Crear Ticket
+
+![New Ticket](docs/screenshots/new-ticket.png)
+
+### Dashboard
+
+![Dashboard](docs/screenshots/dashboard.png)
+
+## 🧪 Testing
+
+```bash
+npm run test
+npm run lint
+```
+
+## 🚀 Despliegue
+
+1. Configurar variables de entorno en el servidor
+2. Ejecutar build: `npm run build`
+3. Iniciar: `npm run start`
+
+## 📄 Documentación Adicional
+
+* [UI-STYLE.md](./UI-STYLE.md) – Justificación de diseño
+* [AI-USAGE.md](./AI-USAGE.md) – Uso de IA en el desarrollo
+
+## 📝 Licencia
+
+MIT License
