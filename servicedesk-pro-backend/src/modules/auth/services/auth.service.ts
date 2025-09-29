@@ -67,7 +67,10 @@ export class AuthService {
             role: user.role,
         };
 
-        const accessToken = this.jwtService.sign(payload);
+        const accessToken = this.jwtService.sign(payload, {
+            secret: process.env.JWT_SECRET,
+            expiresIn: parseInt(process.env.JWT_EXPIRES_IN || '86400', 10), // en segundos
+        });
 
         return {
             user: {
@@ -81,7 +84,7 @@ export class AuthService {
             },
             accessToken,
             tokenType: 'Bearer',
-            expiresIn: 24 * 60 * 60, // 24 hours in seconds
+            expiresIn: parseInt(process.env.JWT_EXPIRES_IN || '86400', 10), // 24 hours in seconds
         };
     }
 
@@ -120,7 +123,10 @@ export class AuthService {
             role: savedUser.role,
         };
 
-        const accessToken = this.jwtService.sign(payload);
+        const accessToken = this.jwtService.sign(payload, {
+            secret: process.env.JWT_SECRET,
+            expiresIn: parseInt(process.env.JWT_EXPIRES_IN || '86400', 10), // en segundos
+        });
 
         return {
             user: {
@@ -134,7 +140,7 @@ export class AuthService {
             },
             accessToken,
             tokenType: 'Bearer',
-            expiresIn: 24 * 60 * 60,
+            expiresIn: parseInt(process.env.JWT_EXPIRES_IN || '86400', 10),
         };
     }
 

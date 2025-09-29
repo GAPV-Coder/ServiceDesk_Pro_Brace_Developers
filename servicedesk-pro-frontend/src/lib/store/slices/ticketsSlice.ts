@@ -189,6 +189,7 @@ const ticketsSlice = createSlice({
         // Obtener tickets del usuario autenticado
         builder.addCase(fetchMyTickets.fulfilled, (state, action) => {
             state.myTickets = action.payload
+            state.pagination = null
         })
 
         // Crear Ticket

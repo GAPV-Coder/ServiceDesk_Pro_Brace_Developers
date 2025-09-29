@@ -33,7 +33,7 @@ export function useTickets() {
     }
 
     const createNewTicket = async (data: CreateTicketRequest) => {
-        const result = await dispatch(createTicket(data))
+        const result = await dispatch(createTicket(data)).unwrap()
         return result
     }
 

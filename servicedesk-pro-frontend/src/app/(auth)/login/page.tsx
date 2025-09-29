@@ -1,16 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { Eye, EyeOff, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { useAppDispatch } from '@/lib/store/hooks'
+import { useAppDispatch, useAppSelector } from '@/lib/store/hooks'
 import { login } from '@/lib/store/slices/authSlice'
 import { loginSchema, type LoginFormData } from '@/lib/validations/auth.schemas'
 import { toast } from 'sonner'
@@ -21,6 +21,15 @@ export default function LoginPage() {
     const [error, setError] = useState('')
     const dispatch = useAppDispatch()
     const router = useRouter()
+    const searchParams = useSearchParams()
+    const redirect = searchParams.get('redirect') || '/my-tickets'
+    const { user } = useAppSelector((state) => state.auth)
+
+    useEffect(() => {
+        if (user) {
+            router.replace(redirect)
+        }
+    }, [user, router, redirect])
 
     const {
         register,
@@ -39,7 +48,7 @@ export default function LoginPage() {
             toast.success('Welcome back!', {
                 description: `Logged in as ${result.user.firstName} ${result.user.lastName}`,
             })
-            router.push('/my-tickets')
+            router.push(redirect)
         } catch (err: any) {
             setError(err || 'Login failed. Please check your credentials.')
             toast.error('Login failed', {
@@ -48,6 +57,10 @@ export default function LoginPage() {
         } finally {
             setIsLoading(false)
         }
+    }
+
+    if (user) {
+        return null
     }
 
     return (
